@@ -2,24 +2,28 @@
 
 ## features included
 
-* twitter-bootstrap-rails
-* slim
+* slim-rails
 * devise
 * cancan
 * simple_form
 * client_side_validations
+* client_side_validations-simple_form
 * rails-i18n
 * devise-i18n
 * rspec
 * capybara
+* jasmine
 * factory_girl
 * kaminari
 * capistrano
 * better_errors
 * meta_request
-* newrelic_rpm
-* turbo-sprockets-rails3
 * quiet_assets
+* thin
+* pry-nav
+* turbo-sprockets-rails3
+* less-rails
+* twitter-bootstrap-rails
 
 ## Usage
 

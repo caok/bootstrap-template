@@ -8,7 +8,6 @@ def template_file path
 end
 
 gem 'slim-rails'
-gem 'twitter-bootstrap-rails'
 gem 'kaminari'
 #gem 'nokogiri'
 #gem 'newrelic_rpm'
@@ -26,20 +25,25 @@ gem 'devise-i18n'
 gem_group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'jasmine'
   gem 'factory_girl_rails'
 end
 
 gem_group :assets do
   gem 'turbo-sprockets-rails3'
   gem 'therubyracer'
+  gem 'less-rails'
+  gem 'twitter-bootstrap-rails'
 end
 
 gem_group :development do
-  gem 'capistrano'
+  gem 'thin'
+  gem 'pry-nav'
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'capistrano'
 end
 
 run 'bundle install'
@@ -65,6 +69,8 @@ generate('bootstrap:install', 'less')
 generate('simple_form:install', '--bootstrap')
 generate('client_side_validations:install')
 generate('rspec:install')
+generate('jasmine:install')
+generate('jasmine:examples')
 
 append_file 'app/assets/javascripts/application.js', <<-CODE, verbose: false
 //= require rails.validations
