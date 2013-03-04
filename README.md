@@ -23,13 +23,13 @@
 
 ## Usage
 
-    rails new blog
-    cd blog
+    rails new example
+    cd example
     rake rails:template LOCATION=https://raw.github.com/caok/bootstrap-template/mysql/template.rb
 
 or
 
-    rails new blog -T -d mysql -m https://raw.github.com/caok/bootstrap-template/mysql/template.rb
+    rails new example -T -m https://raw.github.com/caok/bootstrap-template/mysql/template.rb
 
 ## References
     http://edgeguides.rubyonrails.org/rails_application_templates.html

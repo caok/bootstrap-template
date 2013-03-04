@@ -7,7 +7,6 @@ def template_file path
   file path, open(template_path).read
 end
 
-gem 'mysql2'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
