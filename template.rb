@@ -7,15 +7,12 @@ def template_file path
   file path, open(template_path).read
 end
 
+gem 'mysql2'
 gem 'slim-rails'
+gem 'twitter-bootstrap-rails'
 #gem 'nokogiri'
-
 gem 'kaminari'
 gem 'newrelic_rpm'
-
-gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
 
 gem 'devise'
 gem 'cancan'
@@ -35,6 +32,7 @@ end
 
 gem_group :assets do
   gem 'turbo-sprockets-rails3'
+  gem 'therubyracer'
 end
 
 gem_group :development do
