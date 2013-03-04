@@ -29,7 +29,7 @@
 
 or
 
-    rails new blog -T -m https://raw.github.com/caok/bootstrap-template/mysql/template.rb
+    rails new blog -T -d mysql -m https://raw.github.com/caok/bootstrap-template/mysql/template.rb
 
 ## References
     http://edgeguides.rubyonrails.org/rails_application_templates.html

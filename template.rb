@@ -10,16 +10,16 @@ end
 gem 'mysql2'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
-#gem 'nokogiri'
 gem 'kaminari'
-gem 'newrelic_rpm'
-
-gem 'devise'
-gem 'cancan'
+#gem 'nokogiri'
+#gem 'newrelic_rpm'
 
 gem 'simple_form'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
+
+gem 'devise'
+gem 'cancan'
 
 gem 'rails-i18n'
 gem 'devise-i18n'
