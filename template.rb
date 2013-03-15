@@ -9,7 +9,7 @@ end
 
 gem 'slim-rails'
 gem 'kaminari'
-#gem 'nokogiri'
+gem 'nokogiri'
 #gem 'newrelic_rpm'
 
 gem 'simple_form'
@@ -30,10 +30,9 @@ gem_group :development, :test do
 end
 
 gem_group :assets do
-  gem 'turbo-sprockets-rails3'
   gem 'therubyracer'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails'
+  gem 'turbo-sprockets-rails3'
+  gem 'bootstrap-sass'
 end
 
 gem_group :development do
@@ -52,16 +51,11 @@ generate('devise:install')
 generate('devise', 'user')
 generate('cancan:ability')
 generate('devise:views')
-#run "gem install hpricot ruby_parser haml2slim"
-#run "for i in `find app/views/devise -name '*.erb'` ; do html2haml -e $i ${i%erb}haml ; rm $i ; done"
-#run "for i in `find app/views/devise -name '*.haml'` ; do haml2slim $i ${i%haml}slim ; rm $i ; done"
 
 generate('kaminari:config')
 generate('kaminari:views', 'bootstrap')
-#generate('kaminari:views', 'bootstrap -e haml')
-#run "for i in `find app/views/kaminari -name '*.haml'` ; do haml2slim $i ${i%haml}slim ; rm $i ; done"
 
-generate('bootstrap:install', 'less')
+#generate('bootstrap:install', 'less')
 #generate('bootstrap:layout', 'application fixed')
 #generate('bootstrap:layout', 'application fluid')
 #generate('bootstrap:themed Posts')
@@ -79,6 +73,23 @@ CODE
 
 append_file 'app/assets/stylesheets/application.css', <<-CODE, verbose: false
 body {padding-top: 60px;}
+CODE
+
+append_file 'app/helpers/application_helper.rb', <<-CODE, verbose: false
+  def flash_class(flash_key)   
+    flash_key == :notice ? 'alert-success' : "alert-#{flash_key}"
+  end
+
+  def render_close_icon(dismiss = 'alert')
+    link_to '&times;'.html_safe, '#', :class => 'close', 'data-dismiss' => dismiss
+  end   
+
+  def render_flashes           
+    unless @_flahses_rendered  
+      @_flahses_rendered = true
+      render 'common/flashes'
+    end 
+  end
 CODE
 
 run 'rm -rf app/views/layouts/application.html.erb' # use generated slim version instead
@@ -104,11 +115,12 @@ end
 template_file 'app/views/common/_menu.html.slim'
 template_file 'app/views/common/_search_form.html.slim'
 template_file 'app/views/common/_user_nav.html.slim'
+template_file 'app/views/common/_flahses.html.slim'
 template_file 'app/views/layouts/application.html.slim'
 
 generate(:controller, "home index")
 route "root :to => 'home#index'"
-#rake("db:migrate")
+rake("db:migrate")
 
 git :init
 git :add => "."

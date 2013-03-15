@@ -21,7 +21,6 @@ html lang="zh"
     = render 'common/menu'
 
     .container
-
       .row
         .span3
           .well.sidebar-nav
@@ -31,11 +30,12 @@ html lang="zh"
               li= link_to "Link 2", "/path2"
               li= link_to "Link 3", "/path3"
         .span9
-          = bootstrap_flash
+          = render_flashes
           = yield
-    
+
+      hr
       footer
-        p &copy; Company 2013
+        p &copy; #{Date.current.year}
     /!
       Javascripts
       \==================================================

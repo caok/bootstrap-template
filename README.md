@@ -3,6 +3,8 @@
 ## features included
 
 * slim-rails
+* kaminari
+* nokogiri
 * devise
 * cancan
 * simple_form
@@ -14,7 +16,6 @@
 * capybara
 * jasmine
 * factory_girl
-* kaminari
 * capistrano
 * better_errors
 * meta_request
@@ -22,8 +23,7 @@
 * thin
 * pry-nav
 * turbo-sprockets-rails3
-* less-rails
-* twitter-bootstrap-rails
+* bootstrap-sass
 
 ## Usage
 
@@ -34,6 +34,10 @@
 or
 
     rails new example -T -m https://raw.github.com/caok/bootstrap-template/mysql/template.rb
+
+or
+
+    rails new blog -m ~/bootstrap-template/template.rb
 
 ## References
     http://edgeguides.rubyonrails.org/rails_application_templates.html
