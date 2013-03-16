@@ -101,7 +101,7 @@ end
 template_file 'app/views/common/_menu.html.slim'
 template_file 'app/views/common/_search_form.html.slim'
 template_file 'app/views/common/_user_nav.html.slim'
-template_file 'app/views/common/_flahses.html.slim'
+template_file 'app/views/common/_flashes.html.slim'
 template_file 'app/views/layouts/application.html.slim'
 template_file 'app/helpers/application_helper.rb'
 template_file 'app/assets/javascripts/application.js.coffee'
