@@ -64,37 +64,23 @@ generate('simple_form:install', '--bootstrap')
 generate('client_side_validations:install')
 generate('rspec:install')
 generate('jasmine:install')
-generate('jasmine:examples')
+#generate('jasmine:examples')
 
-append_file 'app/assets/javascripts/application.js', <<-CODE, verbose: false
-//= require rails.validations
-//= require rails.validations.simple_form
-CODE
+#append_file 'app/assets/javascripts/application.js', <<-CODE, verbose: false
+#//= require rails.validations
+#//= require rails.validations.simple_form
+#CODE
 
-append_file 'app/assets/stylesheets/application.css', <<-CODE, verbose: false
-body {padding-top: 60px;}
-CODE
-
-append_file 'app/helpers/application_helper.rb', <<-CODE, verbose: false
-  def flash_class(flash_key)   
-    flash_key == :notice ? 'alert-success' : "alert-#{flash_key}"
-  end
-
-  def render_close_icon(dismiss = 'alert')
-    link_to '&times;'.html_safe, '#', :class => 'close', 'data-dismiss' => dismiss
-  end   
-
-  def render_flashes           
-    unless @_flahses_rendered  
-      @_flahses_rendered = true
-      render 'common/flashes'
-    end 
-  end
-CODE
+#append_file 'app/assets/stylesheets/application.css', <<-CODE, verbose: false
+#body {padding-top: 60px;}
+#CODE
 
 run 'rm -rf app/views/layouts/application.html.erb' # use generated slim version instead
 run "rm -rf public/index.html"
 run "rm -rf app/assets/images/rails.png"
+run "rm -rf app/assets/javascripts/application.js"
+run "rm -rf app/assets/stylesheets/application.css"
+run "rm -rf app/helpers/application_helper.rb"
 
 environment do
 <<-CODE
@@ -117,6 +103,14 @@ template_file 'app/views/common/_search_form.html.slim'
 template_file 'app/views/common/_user_nav.html.slim'
 template_file 'app/views/common/_flahses.html.slim'
 template_file 'app/views/layouts/application.html.slim'
+template_file 'app/helpers/application_helper.rb'
+template_file 'app/assets/javascripts/application.js.coffee'
+template_file 'app/assets/stylesheets/application.css.scss'
+template_file 'app/assets/stylesheets/_0.variables.css.scss'
+template_file 'app/assets/stylesheets/_1.base.css.scss'
+template_file 'app/assets/stylesheets/_2.layout.css.scss'
+template_file 'app/assets/stylesheets/_3.states.css.scss'
+template_file 'app/assets/stylesheets/_4.themes.css.scss'
 
 generate(:controller, "home index")
 route "root :to => 'home#index'"
