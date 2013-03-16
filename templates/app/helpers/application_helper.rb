@@ -25,7 +25,7 @@ module ApplicationHelper
   def render_flashes
     unless @_flahses_rendered
       @_flahses_rendered = true
-      render 'flashes'
+      render 'common/flashes'
     end
   end
 end
