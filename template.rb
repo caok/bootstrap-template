@@ -7,48 +7,9 @@ def template_file path
   file path, open(template_path).read
 end
 
-gem 'slim-rails'
-#gem 'nokogiri'
-
-gem 'kaminari'
-gem 'newrelic_rpm'
-
-gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-
-gem 'devise'
-gem 'cancan'
-
-gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
-
-gem 'rails-i18n'
-gem 'devise-i18n'
-
-gem_group :development, :test do
-  gem 'rspec-rails'
-  gem 'capybara'
-  gem 'factory_girl_rails'
-end
-
-gem_group :assets do
-  gem 'turbo-sprockets-rails3'
-end
-
-gem_group :development do
-  gem 'capistrano'
-  gem 'quiet_assets'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
-end
-
-run 'bundle install'
-
 generate('devise:install')
 generate('devise', 'user')
+generate('devise:views:locale', 'zh-CN')
 generate('cancan:ability')
 generate('devise:views')
 #run "gem install hpricot ruby_parser haml2slim"
@@ -56,9 +17,7 @@ generate('devise:views')
 #run "for i in `find app/views/devise -name '*.haml'` ; do haml2slim $i ${i%haml}slim ; rm $i ; done"
 
 generate('kaminari:config')
-generate('kaminari:views', 'bootstrap')
-#generate('kaminari:views', 'bootstrap -e haml')
-#run "for i in `find app/views/kaminari -name '*.haml'` ; do haml2slim $i ${i%haml}slim ; rm $i ; done"
+generate('kaminari:views', 'bootstrap -e erb')
 
 generate('bootstrap:install', 'less')
 #generate('bootstrap:layout', 'application fixed')
@@ -69,14 +28,19 @@ generate('simple_form:install', '--bootstrap')
 generate('client_side_validations:install')
 generate('rspec:install')
 
+generate('ckeditor:install', '--orm=active_record --backend=carrierwave')
+
 append_file 'app/assets/javascripts/application.js', <<-CODE, verbose: false
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require ckeditor/init
 CODE
 
 append_file 'app/assets/stylesheets/application.css', <<-CODE, verbose: false
 body {padding-top: 60px;}
 CODE
+
+run 'guard init livereload'
 
 run 'rm -rf app/views/layouts/application.html.erb' # use generated slim version instead
 run "rm -rf public/index.html"
@@ -98,10 +62,19 @@ config.time_zone = 'Beijing'
 CODE
 end
 
+environment env: 'development' do
+  config.middleware.insert_before(
+    ActionDispatch::Static, Rack::LiveReload,
+    :min_delay => 500,
+    :max_delay => 10000
+  )
+end
+
 template_file 'app/views/common/_menu.html.slim'
 template_file 'app/views/common/_search_form.html.slim'
 template_file 'app/views/common/_user_nav.html.slim'
 template_file 'app/views/layouts/application.html.slim'
+template_file 'app/assets/javascripts/ckeditor/config.js'
 
 generate(:controller, "home index")
 route "root :to => 'home#index'"
