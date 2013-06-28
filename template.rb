@@ -11,10 +11,6 @@ generate('devise:install')
 generate('devise', 'user')
 generate('devise:views:locale', 'zh-CN')
 generate('cancan:ability')
-generate('devise:views')
-#run "gem install hpricot ruby_parser haml2slim"
-#run "for i in `find app/views/devise -name '*.erb'` ; do html2haml -e $i ${i%erb}haml ; rm $i ; done"
-#run "for i in `find app/views/devise -name '*.haml'` ; do haml2slim $i ${i%haml}slim ; rm $i ; done"
 
 generate('kaminari:config')
 generate('kaminari:views', 'bootstrap -e erb')
@@ -44,20 +40,13 @@ run 'guard init livereload'
 
 run 'rm -rf app/views/layouts/application.html.erb' # use generated slim version instead
 run "rm -rf public/index.html"
-run "rm -rf app/assets/images/rails.png"
 
 environment do
 <<-CODE
-config.time_zone = 'Beijing'
+    config.time_zone = 'Beijing'
     config.i18n.default_locale = 'zh-CN'
     config.generators do |g|
       g.fixture_replacement :factory_girl
-      g.test_framework :rspec, :fixture => true
-      g.stylesheets false
-      g.javascripts false
-      g.helper false
-      g.helper_specs false
-      g.view_specs false
     end
 CODE
 end
@@ -78,7 +67,7 @@ template_file 'app/assets/javascripts/ckeditor/config.js'
 
 generate(:controller, "home index")
 route "root :to => 'home#index'"
-#rake("db:migrate")
+rake("db:migrate")
 
 git :init
 git :add => "."
